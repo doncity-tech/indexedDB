@@ -7,17 +7,34 @@
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <form id="form">
-    <label for="name"> Name:
-      <input type="text" name="name" placeholder="Obi Alika">
-    </label>
-    <label for="name"> Email:
-      <input type="email" name="email" placeholder="info@example.com">
-    </label>
-    <label for="comment">
-      <textarea name="comment" id="comment" spellcheck="true" maxlength="500"></textarea>
-    </label>    
-  </form>
+  <nav>
+    <h1>IndexedDB Example for Beginners</h1>
+  </nav>
+  <div class="row">
+    <div class="container">
+      <form id="form">
+        <div class="name">
+          <label for="name">Name: <br>
+            <input type="text" name="name" placeholder="Obi Alika">
+          </label>
+        </div>
+        <div class="email">
+          <label for="name">Email: <br>
+            <input type="email" name="email" placeholder="info@example.com">
+          </label>
+        </div>
+        <div class="comment">
+          <label for="comment">Comment <br>
+            <textarea name="comment" id="comment" spellcheck="true" maxlength="500"></textarea>
+          </label>
+        </div>
+        <div class="button">
+          <button id="submitBtn">Submit</button>
+        </div>  
+      </form>
+    </div>
+  </div>
+  
   <script scr="main.js"></script>
 </body>
 </html>
