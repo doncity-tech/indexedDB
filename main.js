@@ -20,13 +20,27 @@ const cleanMyText = (text) => {
 
 
 // IndexedDB
+let db;
 (() => {
   if (!window.indexedDB) {
     console.log("Your browser doesn't support IndexedDB.");
     return;
   }
-  // We the start by opening indexedDB
-  let db = window.indexedDB.open('db-example');
+  // We start by opening our database
+  let indexedDB = window.indexedDB.open('db-example', 1);
+  indexedDB.error = () => {
+    console.log('Error:', e.target.result);
+  }
+
+  indexedDB.onsuccess = (e) => {
+    db = e.target.result;
+  }
+
+  indexedDB.onupgradeneeded = (e) => {
+    let db = e.target.result;
+    let dbObject = db.createObjectStore('comment', { keyPath: 'token' });
+
+  }
 
 
 })();
