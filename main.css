@@ -25,7 +25,44 @@ h1 {
   border-radius: 5px;
   box-sizing: border-box;
 }
+form {
+  color: #495057;
+}
 input, textarea {
   width: 100%;
-
+  margin: 5px 0 20px 0;
+  border: 1px solid #dae1e7;
+  border-radius: .25rem;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-clip: padding-box;
+  color: #495057;
+}
+input {  
+  height: cal(2px + 1.5em + .75rem);
+}
+input::placeholder {
+  color: #787a7c;
+}
+.button {
+  display: flex;
+  justify-content: center;
+}
+button {
+  font-weight: 600;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  text-align: center;
+  border: 1px solid transparent;
+  background: #27496d;
+  color: #dae1e7;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+button:hover {
+  background: #142850;
 }
