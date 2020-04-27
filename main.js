@@ -34,18 +34,39 @@ let db;
 
   indexedDB.onsuccess = (e) => {
     db = e.target.result;
+    console.log('db opened');
   }
 
   indexedDB.onupgradeneeded = (e) => {
     let db = e.target.result;
-    let dbObject = db.createObjectStore('comment', { keyPath: 'token' });
+    let commentStore = db.createObjectStore('comment', { autoIncrement: true });
+    console.log('db store created');
 
+    commentStore.createIndex('name', 'name', { unique: false });
+    console.log('name Index created');
+
+    commentStore.createIndex('email', 'email', { unique: true });
+    console.log('email Index created');
   }
-
-
 })();
 
-const sendToIndexedDB = () => {
+const sendToIndexedDB = (data) => {
+  let dbTrans = db.transaction(['comment'], 'readwrite');
+  let request = dbTrans.objectStore('comment').add(data);
+  request.onsuccess = (e) => {
+    console.log('Just added: ', data);
+  }
+
+  dbTrans.onerror = (e) => {
+    console.log('Error:', e.target.result);
+  }
+
+  qs('[name="name"]').value = "";
+  qs('[name="email"]').value = "";
+  qs('[name="comment"]').value = "";
+}
+
+const processFormData = () => {
   const formData = new FormData(qs('#form'));
   let name = cleanMyText(formData.get('name'));
   let email = cleanMyText(formData.get('email'));
@@ -53,14 +74,10 @@ const sendToIndexedDB = () => {
   if (!name && !email && !comment) { return; }
 
   let inputData = { name, email, comment };
-  console.log(inputData);
-
-  qs('[name="name"]').value = "";
-  qs('[name="email"]').value = "";
-  qs('[name="comment"]').value = "";
+  sendToIndexedDB(inputData);
 }
 
 qs('#submitBtn').addEventListener('click', (e) => {
-  sendToIndexedDB();
   e.preventDefault();
+  processFormData();
 });

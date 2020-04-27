@@ -12,12 +12,29 @@ nav {
 h1 {
   padding: 20px 0;
 }
+.details {
+  width: 70%;
+  margin: 20px auto;
+  padding: 15px 10px;
+  border: 1px solid #dae1e7;
+  border-left: 5px solid #00909e;
+  background: #dae1e7;
+}
+.details > span {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0 5px;
+}
+.details span > span {
+  color: red;
+}
+
 .row {
   display: flex;
   justify-content: center;
 }
 .container {
-  margin-top: 80px;
+  margin-top: 20px;
   padding: 20px;
   width: 40%;
   border: 1px solid #dae1e7;
