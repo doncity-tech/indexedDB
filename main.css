@@ -21,7 +21,7 @@ h1 {
   background: #dae1e7;
 }
 .details > span {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 400;
   margin: 0 5px;
 }
@@ -31,17 +31,67 @@ h1 {
 
 .row {
   display: flex;
+}
+.col-one {
+  display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  width: 40%;
+  padding-bottom: 40px;
+}
+.col-two {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 60%;
+  height: 100%;
 }
 .container {
   margin-top: 20px;
   padding: 20px;
-  width: 40%;
+  width: 90%;
   border: 1px solid #dae1e7;
   border-top: 5px solid #00909e;
   border-radius: 5px;
   box-sizing: border-box;
   box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
+}
+.container h3{
+  text-align: center;
+}
+.commentDom {
+  margin-top: 20px;
+  padding: 0 20px;
+}
+.each-comment {
+  border: 1px solid #dae1e7;
+  border-radius: .25rem;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #f1f1f1;
+  background-clip: padding-box;
+  color: #142850;
+}
+#key {
+  float: right;
+  margin-right: 10px;
+  color: red;
+}
+.list-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.list-title span {
+  padding: 5px 15px;
+  border: 1px solid #dae1e7;
+  border-left: 5px solid #00909e;
+  border-right: 5px solid #00909e;
+  background: #dae1e7;
+}
+.comment {
+  margin-top: 15px;
+  line-height: 1.5;
+  font-size: 1rem;
 }
 form {
   color: #495057;

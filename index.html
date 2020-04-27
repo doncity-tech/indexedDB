@@ -17,28 +17,81 @@
     <span><span>4</span> Add, Get or Delete Data from indexedDB</span>
   </div>
   <div class="row">
-    <div class="container">
-      <form id="form">
-        <div class="name">
-          <label for="name">Name: <br>
-            <input type="text" name="name" placeholder="Obi Alika">
-          </label>
-        </div>
-        <div class="email">
-          <label for="name">Email: <br>
-            <input type="email" name="email" placeholder="info@example.com">
-          </label>
-        </div>
-        <div class="comment">
-          <label for="comment">Comment <br>
-            <textarea name="comment" id="comment" spellcheck="true" maxlength="500"></textarea>
-          </label>
-        </div>
-        <div class="button">
-          <button id="submitBtn">Submit</button>
-        </div>  
-      </form>
+    <div class="col-one">
+      <div class="container">
+        <h3>Add to IndexedDB</h3>
+        <form id="form">
+          <div class="name">
+            <label for="name">Name: <br>
+              <input type="text" name="name" placeholder="Obi Alika">
+            </label>
+          </div>
+          <div class="email">
+            <label for="name">Email: <br>
+              <input type="email" name="email" placeholder="info@example.com">
+            </label>
+          </div>
+          <div class="comment">
+            <label for="comment">Comment <br>
+              <textarea name="comment" id="comment" spellcheck="true" maxlength="500"></textarea>
+            </label>
+          </div>
+          <div class="button">
+            <button id="submitBtn">Submit</button>
+          </div>  
+        </form>
+      </div>
+      <div class="container">
+        <h3>Update from IndexedDB</h3>
+        <form id="form">
+          <div class="name">
+            <label for="name">Name: <br>
+              <input type="text" name="name" placeholder="Obi Alika">
+            </label>
+          </div>
+          <div class="email">
+            <label for="name">Email: <br>
+              <input type="email" name="email" placeholder="info@example.com">
+            </label>
+          </div>
+          <div class="comment">
+            <label for="comment">Comment <br>
+              <textarea name="comment" id="comment" spellcheck="true" maxlength="500"></textarea>
+            </label>
+          </div>
+          <div class="button">
+            <button id="submitBtn">Submit</button>
+          </div>  
+        </form>
+      </div>
+      <div class="container">
+        <h3>Delete from IndexedDB</h3>
+        <form id="form">
+          <div class="name">
+            <label for="keypath">Key: <br>
+              <input id="keypath" type="text" name="keypath" placeholder="key">
+            </label>
+          </div>          
+          <div class="button">
+            <button id="submitBtn">Submit</button>
+          </div>  
+        </form>
+      </div>
     </div>
+    <div class="col-two">      
+      <div class="commentDom">
+        <h2 class="list-title"><span>Get all Comments</span></h2>
+        <div class="each-comment">
+          <h3 class="name">Opara Princewill <span id="key">1</span></h3>
+          <p class="email">princewill@gmail.com</p>
+          <p class="comment">
+            Lorem Ipsum is simply dummy text of the printing and 
+            typesetting industry. Lorem Ipsum has been the industry's 
+            standard dummy text ever since the 1500s,
+          </p>
+        </div>        
+      </div>
+    </div>    
   </div>
   <script src="main.js"></script>
 </body>
