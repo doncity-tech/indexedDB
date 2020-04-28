@@ -50,6 +50,7 @@ let db;
   }
 })();
 
+// Add data to indexedDB
 const sendToIndexedDB = (data) => {
   let dbTrans = db.transaction(['comment'], 'readwrite');
   let request = dbTrans.objectStore('comment').add(data);
@@ -66,18 +67,74 @@ const sendToIndexedDB = (data) => {
   qs('[name="comment"]').value = "";
 }
 
+// update indexedDB
+const updateIndexedDB = (data) => {
+  let dbObjectStore = db.transaction(['comment'], 'readwrite').objectStore('comment');
+  let request = dbObjectStore.get(Number(data.keyPath));
+  request.onerror = () => {
+    console.log('db get not successful');
+  }
+
+  request.onsuccess = (e) => {
+    let tempData = e.target.result;
+    tempData.comment = data.comment;
+    let tempRequest = dbObjectStore.put(tempData, Number(data.keyPath));
+
+    tempRequest.onerror = (e) => {
+      console.log('db Update not successful:', e.target);
+    }
+
+    tempRequest.onsuccess = () => {
+      console.log('db Updated');
+
+      qs('.key').value = "";
+      qs('.update-name').value = "";
+      qs('.update-email').value = "";
+      qs('.com-update').value = "";
+    }
+  }
+}
+
+// Add form
 const processFormData = () => {
   const formData = new FormData(qs('#form'));
   let name = cleanMyText(formData.get('name'));
   let email = cleanMyText(formData.get('email'));
   let comment = cleanMyText(formData.get('comment'));
-  if (!name && !email && !comment) { return; }
+  if (!name || !email || !comment) { return; }
 
   let inputData = { name, email, comment };
   sendToIndexedDB(inputData);
 }
 
-qs('#submitBtn').addEventListener('click', (e) => {
-  e.preventDefault();
-  processFormData();
-});
+// Process Update form
+const processUpdateFormData = () => {
+  const formData = new FormData(qs('#form-update'));
+  let keyPath = cleanMyText(formData.get('keypath'));
+  let name = cleanMyText(formData.get('name'));
+  let email = cleanMyText(formData.get('email'));
+  let comment = cleanMyText(formData.get('comment'));
+
+  if (!keyPath || !name || !email || !comment) { return; }
+  let inputData = { keyPath, name, email, comment };
+  updateIndexedDB(inputData);
+}
+
+// uiInteraction
+(() => {
+  qs('#submitBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    processFormData();
+  });
+
+  qs('#updateBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    processUpdateFormData();
+  });
+
+  qs('#updateBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    processUpdateFormData();
+  });
+
+})();

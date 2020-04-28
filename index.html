@@ -14,7 +14,7 @@
     <span><span>1</span> Create or Open indexedDB</span>
     <span><span>2</span> Create objectStore</span>
     <span><span>3</span> Initialise db transaction</span>
-    <span><span>4</span> Add, Get or Delete Data from indexedDB</span>
+    <span><span>4</span> Add, Put, Get or Delete Data from indexedDB</span>
   </div>
   <div class="row">
     <div class="col-one">
@@ -43,20 +43,25 @@
       </div>
       <div class="container">
         <h3>Update from IndexedDB</h3>
-        <form id="form">
+        <form id="form-update">
+          <div>
+            <label>Key: <br>
+              <input class="key" type="number" name="keypath" placeholder="key">
+            </label>
+          </div>    
           <div class="name">
             <label for="name">Name: <br>
-              <input type="text" name="name" placeholder="Obi Alika">
+              <input class="update-name" type="text" name="name" placeholder="Obi Alika">
             </label>
           </div>
           <div class="email">
             <label for="name">Email: <br>
-              <input type="email" name="email" placeholder="info@example.com">
+              <input class="update-email" type="email" name="email" placeholder="info@example.com">
             </label>
           </div>
           <div class="comment">
             <label for="comment">Comment <br>
-              <textarea name="comment" id="comment" spellcheck="true" maxlength="500"></textarea>
+              <textarea class="com-update" name="comment" spellcheck="true" maxlength="500"></textarea>
             </label>
           </div>
           <div class="button">
@@ -66,10 +71,10 @@
       </div>
       <div class="container">
         <h3>Delete from IndexedDB</h3>
-        <form id="form">
+        <form id="form-delete">
           <div class="name">
-            <label for="keypath">Key: <br>
-              <input id="keypath" type="text" name="keypath" placeholder="key">
+            <label>Key: <br>
+              <input type="number" name="keypath" placeholder="key">
             </label>
           </div>          
           <div class="button">
