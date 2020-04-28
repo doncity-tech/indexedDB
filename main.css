@@ -60,6 +60,7 @@ h1 {
   text-align: center;
 }
 .commentDom {
+  width: 90%;
   margin-top: 20px;
   padding: 0 20px;
 }

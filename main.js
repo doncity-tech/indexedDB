@@ -21,7 +21,7 @@ const cleanMyText = (text) => {
 
 // IndexedDB
 let db;
-(() => {
+(async () => {
   if (!window.indexedDB) {
     console.log("Your browser doesn't support IndexedDB.");
     return;
@@ -35,6 +35,7 @@ let db;
   indexedDB.onsuccess = (e) => {
     db = e.target.result;
     console.log('db opened');
+    getAllData();
   }
 
   indexedDB.onupgradeneeded = (e) => {
@@ -50,48 +51,81 @@ let db;
   }
 })();
 
+// Get all indexedDB data if any
+const getAllData = () => {
+  let objectStore = db.transaction(['comment'], 'readonly').objectStore('comment');
+  let keyRequest = objectStore.getAllKeys();
+
+  keyRequest.onsuccess = (e) => {
+    let keys = e.target.result;
+
+    let request = objectStore.getAll();
+    request.onerror = () => {
+      console.log('Error occured');
+    }
+    request.onsuccess = (e) => {
+      let data = e.target.result;
+      console.log(data);
+      data.forEach(x => {
+        let key = keys.shift();
+        qs('.commentDom').innerHTML += `
+        <div class="each-comment">
+          <h3 class="name">${x.name} <span id="key">Key: ${key}</span></h3>
+          <p class="email">${x.email}</p>
+          <p class="comment">${x.comment}</p>
+        </div> `;
+      });
+    }
+  }
+}
+
 // Add data to indexedDB
 const sendToIndexedDB = (data) => {
   let dbTrans = db.transaction(['comment'], 'readwrite');
   let request = dbTrans.objectStore('comment').add(data);
   request.onsuccess = (e) => {
     console.log('Just added: ', data);
+
+    qs('[name="name"]').value = "";
+    qs('[name="email"]').value = "";
+    qs('[name="comment"]').value = "";
+    location.reload();
   }
 
   dbTrans.onerror = (e) => {
     console.log('Error:', e.target.result);
   }
-
-  qs('[name="name"]').value = "";
-  qs('[name="email"]').value = "";
-  qs('[name="comment"]').value = "";
 }
 
 // update indexedDB
 const updateIndexedDB = (data) => {
   let dbObjectStore = db.transaction(['comment'], 'readwrite').objectStore('comment');
-  let request = dbObjectStore.get(Number(data.keyPath));
+  let request = dbObjectStore.put(data, Number(data.keyPath));
   request.onerror = () => {
     console.log('db get not successful');
   }
-
   request.onsuccess = (e) => {
-    let tempData = e.target.result;
-    tempData.comment = data.comment;
-    let tempRequest = dbObjectStore.put(tempData, Number(data.keyPath));
+    console.log('db Updated');
+    qs('.key').value = "";
+    qs('.update-name').value = "";
+    qs('.update-email').value = "";
+    qs('.com-update').value = "";
+    location.reload();
+  }
+}
 
-    tempRequest.onerror = (e) => {
-      console.log('db Update not successful:', e.target);
-    }
+// Delete indexedDB
+const deleteIndexedDB = (keyPath) => {
+  let objectStore = db.transaction(['comment'], 'readwrite').objectStore('comment');
+  let request = objectStore.delete(Number(keyPath));
 
-    tempRequest.onsuccess = () => {
-      console.log('db Updated');
-
-      qs('.key').value = "";
-      qs('.update-name').value = "";
-      qs('.update-email').value = "";
-      qs('.com-update').value = "";
-    }
+  request.onerror = (e) => {
+    console.log('Error:', e.target.error);
+  }
+  request.onsuccess = () => {
+    console.log(`Deleted db data with key: ${keyPath}`);
+    qs('.delete-input').value = "";
+    location.reload();
   }
 }
 
@@ -120,6 +154,14 @@ const processUpdateFormData = () => {
   updateIndexedDB(inputData);
 }
 
+// Process delete form
+const processDeleteFormData = () => {
+  const formData = new FormData(qs('#form-delete'));
+  let keyPath = cleanMyText(formData.get('keypath'));
+  if (!keyPath) { return; }
+  deleteIndexedDB(keyPath);
+}
+
 // uiInteraction
 (() => {
   qs('#submitBtn').addEventListener('click', (e) => {
@@ -132,9 +174,9 @@ const processUpdateFormData = () => {
     processUpdateFormData();
   });
 
-  qs('#updateBtn').addEventListener('click', (e) => {
+  qs('#deleteBtn').addEventListener('click', (e) => {
     e.preventDefault();
-    processUpdateFormData();
+    processDeleteFormData();
   });
 
 })();
