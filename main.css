@@ -31,6 +31,7 @@ h1 {
 
 .row {
   display: flex;
+  flex-wrap: wrap;
 }
 .col-one {
   display: flex;
@@ -133,4 +134,22 @@ button {
 }
 button:hover {
   background: #142850;
+}
+
+@media screen and (max-width: 870px) {
+  .details {
+    width: 90%;    
+  }
+  .details > span {
+    display: block;
+    margin: 5px 5px;
+  }
+  .col-one, .col-two {
+    width: 100%;
+    justify-content: center;
+  }
+  .commentDom {
+    width: 100%;
+    margin-bottom: 40px;
+  }
 }
