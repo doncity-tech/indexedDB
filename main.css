@@ -135,7 +135,17 @@ button {
 button:hover {
   background: #142850;
 }
-
+.footer-2 {
+  background: #142850;
+  padding: 50px 300px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+}
+.footer-2 {
+  margin-top: -4px;
+}
 @media screen and (max-width: 870px) {
   .details {
     width: 90%;    
