@@ -147,6 +147,13 @@ button:hover {
   margin-top: -4px;
 }
 @media screen and (max-width: 870px) {
+  .footer-2 {
+    padding: 50px 40px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 560px) {
   .details {
     width: 90%;    
   }
@@ -161,5 +168,9 @@ button:hover {
   .commentDom {
     width: 100%;
     margin-bottom: 40px;
+  }
+  .footer-2 {
+    padding: 50px 10px;
+    font-size: 14px;
   }
 }
