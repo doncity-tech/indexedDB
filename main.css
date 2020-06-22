@@ -4,10 +4,19 @@
   box-sizing: border-box;
 }
 nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: #142850;
   color: #dae1e7;
   text-align: center;
   font-size: 1rem;
+}
+.logo {
+  border: 1px solid white;
+}
+.link a {
+  color: white;
 }
 h1 {
   padding: 20px 0;
